@@ -1,0 +1,22 @@
+{
+  "name": "grid-cell-neighborhoods",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gridCellNeighborhoods.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Domitalk/grid-cell-neighborhoods.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Domitalk/grid-cell-neighborhoods/issues"
+  },
+  "homepage": "https://github.com/Domitalk/grid-cell-neighborhoods#readme",
+  "dependencies": {
+    "jest": "^27.3.1"
+  }
+}
