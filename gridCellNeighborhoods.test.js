@@ -53,3 +53,7 @@ exampleFourInput[3][7] = 1
 test("Example 4: Two positive values with overlapping neighborhoods; N=2", () => {
     expect(gridCellNeighborhoods(exampleFourInput, 2)).toEqual(22)
 })
+
+test("Edge case in which N = 0", () => {
+    expect(gridCellNeighborhoods(sampleGrid, 0)).toEqual(2)
+})

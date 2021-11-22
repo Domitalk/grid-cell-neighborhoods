@@ -14,6 +14,12 @@ const gridCellNeighborhoods = (grid, N) => {
     }
     
     const flipToTrue = (targetRow, targetCol) => {
+
+        if (N == 0) {
+            trueFalseGrid[targetRow][targetCol] = true
+            return
+        }
+
         for (let r = 0; r < gridRowLength; r++) {
             for (let c = 0; c < gridColLength; c++) {
                 const currentCabDistance = Math.abs(targetRow - r) + Math.abs(targetCol - c)
