@@ -15,6 +15,7 @@ const createInput = () => {
         for (let j = 0; j < 11; j++) {
             tempArr.push(0)
         }
+        elevenByEleven.push(tempArr)
     }
     return elevenByEleven
 }
