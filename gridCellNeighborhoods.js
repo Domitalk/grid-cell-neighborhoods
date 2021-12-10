@@ -3,22 +3,30 @@ const gridCellNeighborhoods = (grid, N) => {
     const gridRowLength = grid.length
     const gridColLength = grid[0].length
     
-    let trueFalseGrid = []
+    let trueFalseGrid = {}
     let count = 0
 
-    for (let i = 0; i < gridRowLength; i++) {
-        let tempArr = []
-        for (let j = 0; j < gridColLength; j++) {
-            tempArr.push(false)
-        }
-        trueFalseGrid.push(tempArr)
-    }
+    // this could prob be changed into object and trueFalseGrid into object as well so we can skip the second for loop entirely and not assign memory to a bunch of false values 
+
+    // for (let i = 0; i < gridRowLength; i++) {
+    //     // let tempArr = []
+    //     // for (let j = 0; j < gridColLength; j++) {
+    //     //     tempArr.push(false)
+    //     // }
+    //     // trueFalseGrid.push(tempArr)
+    // }
             
     const flipToTrue = (targetRow, targetCol) => {
         // console.log(targetRow, targetCol, "flipToTruePoint")
 
         if (N == 0) {
-            if (!trueFalseGrid[targetRow][targetCol]) {
+
+            if (trueFalseGrid[targetRow] && !trueFalseGrid[targetRow][targetCol]) {
+                trueFalseGrid[targetRow][targetCol] = true
+                count++
+            } else if (!trueFalseGrid[targetRow]) {
+                // this eleminates the first for loop in the trueFalseGrid creation process to only make values that are needed to further wittle down the memory use
+                trueFalseGrid[targetRow] = {}
                 trueFalseGrid[targetRow][targetCol] = true
                 count++
             }
@@ -55,13 +63,14 @@ const gridCellNeighborhoods = (grid, N) => {
 
                 // console.log(xVal, yVal)
 
-                if (!trueFalseGrid[xVal][yVal]) {
+                if (trueFalseGrid[xVal] && !trueFalseGrid[xVal][yVal]) {
+                    trueFalseGrid[xVal][yVal] = true
                     count++
-                    
-                    // console.log(count, "count")
-
-                    trueFalseGrid[xVal][yVal] = true 
-                } 
+                } else if (!trueFalseGrid[xVal]) {
+                    trueFalseGrid[xVal] = {}
+                    trueFalseGrid[xVal][yVal] = true
+                    count++
+                }
             }
 
             if (r < targetRow) {
