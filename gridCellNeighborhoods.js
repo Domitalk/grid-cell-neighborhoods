@@ -15,6 +15,7 @@ const gridCellNeighborhoods = (grid, N) => {
     }
             
     const flipToTrue = (targetRow, targetCol) => {
+        // console.log(targetRow, targetCol, "flipToTruePoint")
 
         if (N == 0) {
             if (!trueFalseGrid[targetRow][targetCol]) {
@@ -34,9 +35,9 @@ const gridCellNeighborhoods = (grid, N) => {
 
             let xVal = r 
             if (xVal < 0) {
-                xVal = gridRowLength + xVal - 1
-            } else if (xVal > gridRowLength) {
-                xVal = xVal - gridRowLength - 1
+                xVal = gridRowLength + xVal 
+            } else if (xVal > gridRowLength - 1) {
+                xVal = xVal - gridRowLength
             }
 
             let leftValue = targetCol - increments 
@@ -47,16 +48,16 @@ const gridCellNeighborhoods = (grid, N) => {
                 let yVal = c 
 
                 if (yVal < 0) {
-                    yVal = gridColLength + yVal - 1
-                } else if (yVal > gridColLength) {
-                    yVal = yVal - gridColLength - 1
+                    yVal = gridColLength + yVal
+                } else if (yVal > gridColLength - 1) {
+                    yVal = yVal - gridColLength
                 }
 
                 // console.log(xVal, yVal)
 
                 if (!trueFalseGrid[xVal][yVal]) {
                     count++
-
+                    
                     // console.log(count, "count")
 
                     trueFalseGrid[xVal][yVal] = true 

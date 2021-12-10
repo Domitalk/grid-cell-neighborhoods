@@ -28,17 +28,23 @@ const createInput = () => {
     }
     return elevenByEleven
 }
+////// don't use /////// 
 
-test("sample test for visualizing the problem", () => {
-    expect(gridCellNeighborhoods(sampleGrid, 2)).toEqual(14)
-})
+// test("sample test for visualizing the problem", () => {
+//     expect(gridCellNeighborhoods(sampleGrid, 2)).toEqual(14)
+// })
 
-let exampleTwoInput = createInput()
-exampleTwoInput[1][5] = 1
+// let exampleTwoInput = createInput()
+// exampleTwoInput[1][5] = 1
 
-test("Example 2: One positive cell near an edge; N=3", () => {
-    expect(gridCellNeighborhoods(exampleTwoInput, 3)).toEqual(21)
-})
+// test("Example 2: One positive cell near an edge; N=3", () => {
+//     expect(gridCellNeighborhoods(exampleTwoInput, 3)).toEqual(21)
+// })
+
+/////// don't use ///////
+
+
+
 
 let exampleOneInput = createInput()
 exampleOneInput[5][5] = 1
