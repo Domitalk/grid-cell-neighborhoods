@@ -17,7 +17,11 @@ const gridCellNeighborhoods = (grid, N) => {
     const flipToTrue = (targetRow, targetCol) => {
 
         if (N == 0) {
-            trueFalseGrid[targetRow][targetCol] = true
+            if (!trueFalseGrid[targetRow][targetCol]) {
+                trueFalseGrid[targetRow][targetCol] = true
+                count++
+            }
+            
             return
         }
 
