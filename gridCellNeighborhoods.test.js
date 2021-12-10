@@ -8,12 +8,13 @@ let sampleGrid = [
     [0, 0, 0, 0, 0]
 ]
 
-// should be output 
+// should be output with the new interview prompt 
 // [
-//     [true, true, true, true, true],
-//     [true, true, true, true, true],
+//     [true, true, true, POINT, true],
+//     [POINT, true, true, true, true],
 //     [true, true, false, true, false],
-//     [true, false, false, false, false]
+//     [true, false, false, true, false]
+//     [true, false, true, true, true]
 // ]
 
 const createInput = () => {
@@ -62,14 +63,19 @@ test("Example 4: Two positive values with overlapping neighborhoods; N=2", () =>
     expect(gridCellNeighborhoods(exampleFourInput, 2)).toEqual(22)
 })
 
-
 test("Edge case in which N = 0", () => {
     expect(gridCellNeighborhoods(sampleGrid, 0)).toEqual(2)
 })
 
+
+
 let wrapAroundInput = createInput()
 wrapAroundInput[1][5] = 1
 
-test("Interview test wherein the edges wrap around each other", () => {
+test("Interview prompt wherein the edges wrap around each other", () => {
     expect(gridCellNeighborhoods(wrapAroundInput, 3)).toEqual(25)
+})
+
+test("Interview prompt wherein the edges wrap around each other but with two positive values and an overlap", () => {
+    expect(gridCellNeighborhoods(sampleGrid, 2)).toEqual(20)
 })
