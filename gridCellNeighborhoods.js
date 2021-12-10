@@ -3,34 +3,22 @@ const gridCellNeighborhoods = (grid, N) => {
     const gridRowLength = grid.length
     const gridColLength = grid[0].length
     
+    // changed duplicate sized Array of Arrays into a hashMap
     let trueFalseGrid = {}
     let count = 0
-
-    // this could prob be changed into object and trueFalseGrid into object as well so we can skip the second for loop entirely and not assign memory to a bunch of false values 
-
-    // for (let i = 0; i < gridRowLength; i++) {
-    //     // let tempArr = []
-    //     // for (let j = 0; j < gridColLength; j++) {
-    //     //     tempArr.push(false)
-    //     // }
-    //     // trueFalseGrid.push(tempArr)
-    // }
             
     const flipToTrue = (targetRow, targetCol) => {
-        // console.log(targetRow, targetCol, "flipToTruePoint")
 
+        // exit case of N=0
         if (N == 0) {
-
-            if (trueFalseGrid[targetRow] && !trueFalseGrid[targetRow][targetCol]) {
-                trueFalseGrid[targetRow][targetCol] = true
-                count++
-            } else if (!trueFalseGrid[targetRow]) {
-                // this eleminates the first for loop in the trueFalseGrid creation process to only make values that are needed to further wittle down the memory use
+            if (!trueFalseGrid[targetRow]) {
                 trueFalseGrid[targetRow] = {}
                 trueFalseGrid[targetRow][targetCol] = true
                 count++
+            } else if (trueFalseGrid[targetRow] && !trueFalseGrid[targetRow][targetCol]) {
+                trueFalseGrid[targetRow][targetCol] = true
+                count++
             }
-            
             return
         }
 
@@ -41,36 +29,38 @@ const gridCellNeighborhoods = (grid, N) => {
         
         for (let r = topValue; r <= bottomValue; r++) {
 
-            let xVal = r 
+            let xVal = r
+            
+            // adjust for wrap around 
             if (xVal < 0) {
                 xVal = gridRowLength + xVal 
             } else if (xVal > gridRowLength - 1) {
                 xVal = xVal - gridRowLength
             }
 
-            let leftValue = targetCol - increments 
-            let rightValue = targetCol + increments 
+            const leftValue = targetCol - increments 
+            const rightValue = targetCol + increments 
 
-            // this is where the problem is starting 
             for (let c = leftValue; c <= rightValue; c++) {
                 let yVal = c 
 
+                // adjust for wrap around
                 if (yVal < 0) {
                     yVal = gridColLength + yVal
                 } else if (yVal > gridColLength - 1) {
                     yVal = yVal - gridColLength
                 }
 
-                // console.log(xVal, yVal)
-
-                if (trueFalseGrid[xVal] && !trueFalseGrid[xVal][yVal]) {
-                    trueFalseGrid[xVal][yVal] = true
-                    count++
-                } else if (!trueFalseGrid[xVal]) {
+                // if the column key doesn't exist, the row definitely doesn't. So, create col key and row key 
+                if (!trueFalseGrid[xVal]) {
                     trueFalseGrid[xVal] = {}
                     trueFalseGrid[xVal][yVal] = true
                     count++
-                }
+                // if column key exists, but row doesn't. 
+                } else if (trueFalseGrid[xVal] && !trueFalseGrid[xVal][yVal]) {
+                    trueFalseGrid[xVal][yVal] = true
+                    count++
+                } 
             }
 
             if (r < targetRow) {
@@ -78,7 +68,6 @@ const gridCellNeighborhoods = (grid, N) => {
             } else {
                 increments--
             }
-
         }
     }
 
