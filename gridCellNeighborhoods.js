@@ -13,6 +13,8 @@ const gridCellNeighborhoods = (grid, N) => {
         trueFalseGrid.push(tempArr)
     }
     
+    let count = 0
+        
     const flipToTrue = (targetRow, targetCol) => {
 
         if (N == 0) {
@@ -20,13 +22,42 @@ const gridCellNeighborhoods = (grid, N) => {
             return
         }
 
-        for (let r = 0; r < gridRowLength; r++) {
-            for (let c = 0; c < gridColLength; c++) {
-                const currentCabDistance = Math.abs(targetRow - r) + Math.abs(targetCol - c)
-                if (currentCabDistance <= N) {
-                    trueFalseGrid[r][c] = true
-                }
+        const topValue = targetRow - N
+        const bottomValue = targetRow + N
+        
+        let increments = 0
+        
+        for (let r = topValue; r <= bottomValue; r++) {
+            if (r <= targetRow) {
+                increments++
+            } else {
+                increments--
             }
+
+            let xVal = r 
+            // if wrapping, then find the value on the other side 
+            if (xVal < 0) {
+                xVal = gridRowLength + xVal - 1
+            } else if (xVal > gridRowLength) {
+                xVal = xVal - gridRowLength - 1
+            }
+
+            for (let c = (targetCol - increments); c <= (targetCol + increments); c++) {
+                let yVal = c 
+
+                if (yVal < 0) {
+                    yVal = gridColLength + yVal - 1
+                } else if (yVal > gridColLength) {
+                    yVal = yVal - gridColLength - 1
+                }
+
+                console.log(xVal, yVal)
+
+                if (!trueFalseGrid[xVal][yVal]) {
+                    count++
+                    trueFalseGrid[xVal][yVal] = true 
+                } 
+            }         
         }
     }
 
@@ -34,16 +65,6 @@ const gridCellNeighborhoods = (grid, N) => {
         for (let j = 0; j < gridColLength; j++) {
             if (grid[i][j] > 0) {
                 flipToTrue(i, j)
-            }
-        }
-    }
-
-    let count = 0
-    
-    for (let i = 0; i < gridRowLength; i++) {
-        for (let j = 0; j < gridColLength; j++) {
-            if (trueFalseGrid[i][j]) {
-                count += 1
             }
         }
     }
